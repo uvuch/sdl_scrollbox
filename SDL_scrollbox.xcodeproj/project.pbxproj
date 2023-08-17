@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		46BB211C2A8EEAEA006CECB1 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 46BB211B2A8EEAEA006CECB1 /* main.cpp */; };
+		46BB21262A8EEB14006CECB1 /* SDL2_ttf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46BB21232A8EEB14006CECB1 /* SDL2_ttf.framework */; };
+		46BB21272A8EEB14006CECB1 /* SDL2_ttf.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 46BB21232A8EEB14006CECB1 /* SDL2_ttf.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		46BB21282A8EEB14006CECB1 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46BB21242A8EEB14006CECB1 /* SDL2.framework */; };
+		46BB21292A8EEB14006CECB1 /* SDL2.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 46BB21242A8EEB14006CECB1 /* SDL2.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		46BB212D2A8EEB1C006CECB1 /* SDL2_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46BB21252A8EEB14006CECB1 /* SDL2_image.framework */; };
+		46BB212E2A8EEB1C006CECB1 /* SDL2_image.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 46BB21252A8EEB14006CECB1 /* SDL2_image.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -20,11 +26,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
+		46BB212C2A8EEB14006CECB1 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				46BB212E2A8EEB1C006CECB1 /* SDL2_image.framework in Embed Frameworks */,
+				46BB21272A8EEB14006CECB1 /* SDL2_ttf.framework in Embed Frameworks */,
+				46BB21292A8EEB14006CECB1 /* SDL2.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		46BB21182A8EEAEA006CECB1 /* SDL_scrollbox */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SDL_scrollbox; sourceTree = BUILT_PRODUCTS_DIR; };
 		46BB211B2A8EEAEA006CECB1 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		46BB21232A8EEB14006CECB1 /* SDL2_ttf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_ttf.framework; path = ../../../../../Library/Frameworks/SDL2_ttf.framework; sourceTree = "<group>"; };
+		46BB21242A8EEB14006CECB1 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
+		46BB21252A8EEB14006CECB1 /* SDL2_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_image.framework; path = ../../../../../Library/Frameworks/SDL2_image.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +54,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46BB212D2A8EEB1C006CECB1 /* SDL2_image.framework in Frameworks */,
+				46BB21262A8EEB14006CECB1 /* SDL2_ttf.framework in Frameworks */,
+				46BB21282A8EEB14006CECB1 /* SDL2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -43,6 +68,7 @@
 			children = (
 				46BB211A2A8EEAEA006CECB1 /* SDL_scrollbox */,
 				46BB21192A8EEAEA006CECB1 /* Products */,
+				46BB21222A8EEB14006CECB1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -62,6 +88,16 @@
 			path = SDL_scrollbox;
 			sourceTree = "<group>";
 		};
+		46BB21222A8EEB14006CECB1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				46BB21252A8EEB14006CECB1 /* SDL2_image.framework */,
+				46BB21232A8EEB14006CECB1 /* SDL2_ttf.framework */,
+				46BB21242A8EEB14006CECB1 /* SDL2.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -72,6 +108,7 @@
 				46BB21142A8EEAEA006CECB1 /* Sources */,
 				46BB21152A8EEAEA006CECB1 /* Frameworks */,
 				46BB21162A8EEAEA006CECB1 /* CopyFiles */,
+				46BB212C2A8EEB14006CECB1 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -239,6 +276,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -247,6 +288,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
