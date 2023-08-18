@@ -26,8 +26,6 @@ int Game::init() {
     if (m_pWindow) m_pRenderer = SDL_CreateRenderer(m_pWindow, -1, 0);
     if (!m_pWindow || !m_pRenderer)
         return errorMessage(SDL_GetError());
-     
-    SDL_SetRenderDrawColor(m_pRenderer, 0, 255, 255, 255); // RGBA
     
     Menu* pMenu = new Menu();
     m_objects.push_back(pMenu);
@@ -56,10 +54,11 @@ void Game::update() {
 }
 
 void Game::render() {
+    SDL_SetRenderDrawColor(m_pRenderer, 0, 255, 255, 255); // RGBA
     SDL_RenderClear(m_pRenderer);
     
     for(std::vector<Object*>::size_type i = 0; i != m_objects.size(); i++ ) {
-            m_objects[i]->draw();
+            m_objects[i]->draw(m_pRenderer);
     }
     
     SDL_RenderPresent(m_pRenderer);
