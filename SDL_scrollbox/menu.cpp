@@ -26,6 +26,8 @@ bool Menu::handleEvents(const SDL_Event& event) {
             return this->onMouseBtnDownHandler(event);
         case SDL_MOUSEBUTTONUP:
             return this->onMouseBtnUpHandler(event);
+        case SDL_MOUSEMOTION:
+            return this->onMouseMotionHandler(event);
     }
 
     return false;
@@ -48,10 +50,12 @@ void Menu::draw(SDL_Renderer *pRenderer) {
 
 bool Menu::onMouseBtnDownHandler(const SDL_Event& event) {
     if (event.button.button == SDL_BUTTON_LEFT &&
-        event.button.x >= 100 && event.button.x <= 300 &&
-        event.button.y >= 100 && event.button.y <= 300)
+        event.button.x >= m_rect.x && event.button.x <= m_rect.x + m_rect.w &&
+        event.button.y >= m_rect.y && event.button.y <= m_rect.y + m_rect.h)
     {
         clicked = true;
+        mouse_x = event.button.x - m_rect.x;
+        mouse_y = event.button.y - m_rect.y;
         std::cout << "Clicked inside the menu" << std::endl;
         return true;
     }
@@ -61,5 +65,15 @@ bool Menu::onMouseBtnDownHandler(const SDL_Event& event) {
 
 bool Menu::onMouseBtnUpHandler(const SDL_Event& event) {
     clicked = false;
+    return false;
+}
+
+bool Menu::onMouseMotionHandler(const SDL_Event& event) {
+    if (clicked) {
+        m_rect.x = event.motion.x - mouse_x;
+        m_rect.y = event.motion.y - mouse_y;
+        return true;
+    }
+    
     return false;
 }

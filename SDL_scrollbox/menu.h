@@ -20,9 +20,12 @@ public:
 private:
     SDL_Rect m_rect;
     SDL_Color m_color;
+    int mouse_x, mouse_y;
     bool clicked;
+
     bool onMouseBtnDownHandler(const SDL_Event& event);
     bool onMouseBtnUpHandler(const SDL_Event& event);
+    bool onMouseMotionHandler(const SDL_Event& event);
 };
 
 #endif /* menu_h */
