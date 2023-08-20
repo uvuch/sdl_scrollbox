@@ -12,6 +12,7 @@
 
 class Object {
 public:
+    virtual ~Object() {}
     virtual bool handleEvents(const SDL_Event& event) = 0;
     virtual void update() = 0;
     virtual void draw(SDL_Renderer *pRenderer) = 0;

@@ -16,6 +16,7 @@
 		46BB21392A8EED02006CECB1 /* object.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 46BB21352A8EED02006CECB1 /* object.cpp */; };
 		46BB213A2A8EED02006CECB1 /* texture_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 46BB21362A8EED02006CECB1 /* texture_manager.cpp */; };
 		46BB213D2A8EEDCF006CECB1 /* menu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 46BB213B2A8EEDCF006CECB1 /* menu.cpp */; };
+		46C209212A8FCD1800CBE4DC /* menu_item.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 46C2091F2A8FCD1800CBE4DC /* menu_item.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -46,6 +47,8 @@
 		46BB21362A8EED02006CECB1 /* texture_manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = texture_manager.cpp; sourceTree = "<group>"; };
 		46BB213B2A8EEDCF006CECB1 /* menu.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = menu.cpp; sourceTree = "<group>"; };
 		46BB213C2A8EEDCF006CECB1 /* menu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = menu.h; sourceTree = "<group>"; };
+		46C2091F2A8FCD1800CBE4DC /* menu_item.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = menu_item.cpp; sourceTree = "<group>"; };
+		46C209202A8FCD1800CBE4DC /* menu_item.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = menu_item.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +96,8 @@
 				46BB211B2A8EEAEA006CECB1 /* main.cpp */,
 				46BB213B2A8EEDCF006CECB1 /* menu.cpp */,
 				46BB213C2A8EEDCF006CECB1 /* menu.h */,
+				46C2091F2A8FCD1800CBE4DC /* menu_item.cpp */,
+				46C209202A8FCD1800CBE4DC /* menu_item.h */,
 			);
 			path = SDL_scrollbox;
 			sourceTree = "<group>";
@@ -170,6 +175,7 @@
 				46BB21392A8EED02006CECB1 /* object.cpp in Sources */,
 				46BB213A2A8EED02006CECB1 /* texture_manager.cpp in Sources */,
 				46BB21382A8EED02006CECB1 /* error.cpp in Sources */,
+				46C209212A8FCD1800CBE4DC /* menu_item.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

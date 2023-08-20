@@ -8,13 +8,21 @@
 #include "error.h"
 #include "game.h"
 #include "menu.h"
+#include <SDL2_ttf/SDL_ttf.h>
 
 Game::Game() : m_bQuit(true) {};
 
 Game::~Game() {
-     if (m_pRenderer) SDL_DestroyRenderer(m_pRenderer);
-     if (m_pWindow) SDL_DestroyWindow(m_pWindow);
+    for(std::vector<Object*>::size_type i = 0; i != m_objects.size(); i++ ) {
+        std::cout << "Deleting objects..." << std::endl;
+        delete m_objects[i];
+    }
+    m_objects.clear();
 
+    if (m_pRenderer) SDL_DestroyRenderer(m_pRenderer);
+    if (m_pWindow) SDL_DestroyWindow(m_pWindow);
+    
+    TTF_Quit();
     SDL_Quit();
 }
 
@@ -26,6 +34,8 @@ int Game::init() {
     if (m_pWindow) m_pRenderer = SDL_CreateRenderer(m_pWindow, -1, 0);
     if (!m_pWindow || !m_pRenderer)
         return errorMessage(SDL_GetError());
+    
+    TTF_Init();
     
     Menu* pMenu = new Menu();
     m_objects.push_back(pMenu);
@@ -42,8 +52,10 @@ void Game::handleEvents() {
             if (m_objects[i]->handleEvents(event))
                 break;
         
-        if (event.type == SDL_QUIT)
+        if (event.type == SDL_QUIT) {
             m_bQuit = true;
+            std::cout << "SQL QUIT command issued" << std::endl;
+        }
     }
 }
 
@@ -54,12 +66,16 @@ void Game::update() {
 }
 
 void Game::render() {
+    int started_at = SDL_GetTicks();
     SDL_SetRenderDrawColor(m_pRenderer, 0, 255, 255, 255); // RGBA
     SDL_RenderClear(m_pRenderer);
     
     for(std::vector<Object*>::size_type i = 0; i != m_objects.size(); i++ ) {
-            m_objects[i]->draw(m_pRenderer);
+        m_objects[i]->draw(m_pRenderer);
     }
+    
+    if (SDL_GetTicks() - started_at < 1000.0 / 60)
+        SDL_Delay(1000.0 / 60 - (SDL_GetTicks() - started_at));
     
     SDL_RenderPresent(m_pRenderer);
 }
