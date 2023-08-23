@@ -15,8 +15,8 @@ Error* Error::Instance() {
     return s_pInstance;
 }
 
-int Error::message(const char *msg) {
+bool Error::message(const char *msg) {
     std::cout << "!! Error: ";
     std::cout << msg << std::endl;
-    return -1;
+    return false;
 }

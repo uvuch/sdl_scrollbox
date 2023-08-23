@@ -4,11 +4,23 @@
 //
 //  Created by Serge Muzyka on 7/9/23.
 //
-
-#include "error.h"
 #include "game.h"
-#include "menu.h"
-#include <SDL2_ttf/SDL_ttf.h>
+
+Game* Game::s_pInstance = nullptr;
+
+Game* Game::Instance() {
+    if (!s_pInstance) s_pInstance = new Game();
+    
+    return s_pInstance;
+}
+
+void Game::finish() {
+    if (s_pInstance) delete s_pInstance;
+}
+
+SDL_Renderer* Game::getRenderer() {
+    return m_pRenderer;
+}
 
 Game::Game() : m_bQuit(true) {};
 
@@ -26,7 +38,7 @@ Game::~Game() {
     SDL_Quit();
 }
 
-int Game::init() {
+bool Game::init() {
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
         return errorMessage(SDL_GetError());
     
@@ -42,7 +54,7 @@ int Game::init() {
     
     m_bQuit = false;
     
-    return 0;
+    return true;
 }
 
 void Game::handleEvents() {
@@ -71,7 +83,7 @@ void Game::render() {
     SDL_RenderClear(m_pRenderer);
     
     for(std::vector<Object*>::size_type i = 0; i != m_objects.size(); i++ ) {
-        m_objects[i]->draw(m_pRenderer);
+        m_objects[i]->draw();
     }
     
     if (SDL_GetTicks() - started_at < 1000.0 / 60)

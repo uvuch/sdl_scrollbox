@@ -7,9 +7,9 @@
 #ifndef menu_h
 #define menu_h
 
+#include "game.h"
 #include "object.h"
 #include "menu_item.h"
-#include <vector>
 
 class Menu: public Object {
 public:
@@ -18,7 +18,7 @@ public:
     
     bool handleEvents(const SDL_Event& event);
     void update();
-    void draw(SDL_Renderer *pRenderer);
+    void draw();
     
 private:
     SDL_Rect m_rect;

@@ -13,7 +13,7 @@
 class Error {
 public:
     static Error* Instance();
-    int message(const char *msg);
+    bool message(const char *msg);
     
 private:
     static Error *s_pInstance;

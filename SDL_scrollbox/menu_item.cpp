@@ -36,7 +36,8 @@ void MenuItem::update(int x, int y) {
     m_rect.y = y;
 }
 
-void MenuItem::draw(SDL_Renderer *pRenderer) {
+void MenuItem::draw() {
+    SDL_Renderer* pRenderer = Game::Instance()->getRenderer();
     SDL_SetRenderDrawColor(pRenderer, 255, 0, 0, 255); // RGBA
     SDL_RenderFillRect(pRenderer, &m_rect);
     SDL_SetRenderDrawColor(pRenderer, 100, 0, 0, 255); // RGBA

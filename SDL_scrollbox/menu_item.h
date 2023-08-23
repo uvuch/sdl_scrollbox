@@ -8,9 +8,7 @@
 #ifndef menu_item_h
 #define menu_item_h
 
-#include <SDL2/SDL.h>
-#include <SDL2_ttf/SDL_ttf.h>
-#include <string>
+#include "game.h"
 
 class MenuItem {
 public:
@@ -19,7 +17,7 @@ public:
     std::string getLabel() { return m_strLabel; }
     bool handleEvents(const SDL_Event& event);
     void update(int x, int y);
-    void draw(SDL_Renderer *pRenderer);
+    void draw();
     
     bool onMouseBtnDownHandler(const SDL_Event& event);
     bool onMouseBtnUpHandler(const SDL_Event& event);

@@ -9,21 +9,19 @@
 #include "game.h"
 
 int main(int argc, const char * argv[]) {
-    Game *pGame = new Game();
-    if (!pGame)
-        return errorMessage("Could not create game object");
-    
-    if (pGame->init() != 0) {
-        delete pGame;
-        return -1;
+    int returnResult = -1;
+    Game *pGame = Game::Instance();
+
+    if (pGame && pGame->init()) {
+        while(pGame->running()) {
+            pGame->handleEvents();
+            pGame->update();
+            pGame->render();
+        }
+
+        returnResult = 0;;
     }
     
-    while(pGame->running()) {
-        pGame->handleEvents();
-        pGame->update();
-        pGame->render();
-    }
-    
-    delete pGame;
-    return 0;
+    Game::finish();
+    return returnResult;
 }
