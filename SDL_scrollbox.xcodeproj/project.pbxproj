@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		46798EC52AA3F7A8003C7206 /* renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 46798EC32AA3F7A8003C7206 /* renderer.cpp */; };
 		46BB211C2A8EEAEA006CECB1 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 46BB211B2A8EEAEA006CECB1 /* main.cpp */; };
 		46BB21262A8EEB14006CECB1 /* SDL2_ttf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46BB21232A8EEB14006CECB1 /* SDL2_ttf.framework */; };
 		46BB21282A8EEB14006CECB1 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46BB21242A8EEB14006CECB1 /* SDL2.framework */; };
@@ -32,6 +33,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		46798EC32AA3F7A8003C7206 /* renderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = renderer.cpp; sourceTree = "<group>"; };
+		46798EC42AA3F7A8003C7206 /* renderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = renderer.h; sourceTree = "<group>"; };
+		46798EC62AA3F7F2003C7206 /* common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = common.h; sourceTree = "<group>"; };
 		46BB21182A8EEAEA006CECB1 /* SDL_scrollbox */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SDL_scrollbox; sourceTree = BUILT_PRODUCTS_DIR; };
 		46BB211B2A8EEAEA006CECB1 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		46BB21232A8EEB14006CECB1 /* SDL2_ttf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_ttf.framework; path = ../../../../../Library/Frameworks/SDL2_ttf.framework; sourceTree = "<group>"; };
@@ -98,6 +102,9 @@
 				46BB213C2A8EEDCF006CECB1 /* menu.h */,
 				46C2091F2A8FCD1800CBE4DC /* menu_item.cpp */,
 				46C209202A8FCD1800CBE4DC /* menu_item.h */,
+				46798EC32AA3F7A8003C7206 /* renderer.cpp */,
+				46798EC42AA3F7A8003C7206 /* renderer.h */,
+				46798EC62AA3F7F2003C7206 /* common.h */,
 			);
 			path = SDL_scrollbox;
 			sourceTree = "<group>";
@@ -173,6 +180,7 @@
 				46BB21372A8EED02006CECB1 /* game.cpp in Sources */,
 				46BB213D2A8EEDCF006CECB1 /* menu.cpp in Sources */,
 				46BB21392A8EED02006CECB1 /* object.cpp in Sources */,
+				46798EC52AA3F7A8003C7206 /* renderer.cpp in Sources */,
 				46BB213A2A8EED02006CECB1 /* texture_manager.cpp in Sources */,
 				46BB21382A8EED02006CECB1 /* error.cpp in Sources */,
 				46C209212A8FCD1800CBE4DC /* menu_item.cpp in Sources */,

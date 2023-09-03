@@ -8,6 +8,11 @@
 #ifndef menu_item_h
 #define menu_item_h
 
+#include <SDL2/SDL.h>
+#include <SDL2_ttf/SDL_ttf.h>
+#include <iostream>
+#include <string>
+
 #include "game.h"
 
 class MenuItem {

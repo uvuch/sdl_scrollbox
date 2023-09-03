@@ -8,24 +8,16 @@
 #ifndef game_h
 #define game_h
 
-#include <SDL2/SDL.h>
-#include <SDL2_ttf/SDL_ttf.h>
-
-#include <vector>
-#include <iostream>
-#include <string>
-
+#include "common.h"
 #include "object.h"
-#include "error.h"
 #include "menu.h"
 
 class Game
 {
 public:
-    static Game* Instance();
-    static void finish();
+    Game();
+    ~Game();
     
-    SDL_Renderer* getRenderer();
     bool init();
     bool running() { return !m_bQuit; }
     void handleEvents();
@@ -33,16 +25,9 @@ public:
     void render();
     
 private:
-    static Game *s_pInstance;
     bool m_bQuit;
     
-    SDL_Window* m_pWindow;
-    SDL_Renderer* m_pRenderer;
-    
     std::vector<Object*> m_objects;
-    
-    Game();
-    ~Game();
 };
 
 

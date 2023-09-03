@@ -10,18 +10,23 @@
 
 int main(int argc, const char * argv[]) {
     int returnResult = -1;
-    Game *pGame = Game::Instance();
+    Game *pGame = new Game();
+    if (!pGame) {
+        errorMessage("Could not create Game object");
+        return -1;
+    }
 
-    if (pGame && pGame->init()) {
-        while(pGame->running()) {
-            pGame->handleEvents();
-            pGame->update();
-            pGame->render();
-        }
-
-        returnResult = 0;;
+    if (!pGame->init()) {
+        errorMessage("Could not create Game object");
+        return -1;
     }
     
-    Game::finish();
-    return returnResult;
+    while(pGame->running()) {
+        pGame->handleEvents();
+        pGame->update();
+        pGame->render();
+    }
+    
+    delete pGame;
+    return 0;
 }

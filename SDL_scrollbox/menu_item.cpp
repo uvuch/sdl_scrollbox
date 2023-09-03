@@ -6,7 +6,7 @@
 //
 
 #include "menu_item.h"
-#include "iostream"
+#include "renderer.h"
 
 MenuItem::MenuItem(std::string label, int x, int y, int w, int h) : m_strLabel(label)
 {
@@ -37,7 +37,7 @@ void MenuItem::update(int x, int y) {
 }
 
 void MenuItem::draw() {
-    SDL_Renderer* pRenderer = Game::Instance()->getRenderer();
+    SDL_Renderer* pRenderer = Renderer::instance();
     SDL_SetRenderDrawColor(pRenderer, 255, 0, 0, 255); // RGBA
     SDL_RenderFillRect(pRenderer, &m_rect);
     SDL_SetRenderDrawColor(pRenderer, 100, 0, 0, 255); // RGBA

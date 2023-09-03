@@ -6,6 +6,7 @@
 //
 
 #include "menu.h"
+#include "renderer.h"
 
 
 Menu::Menu() {
@@ -80,7 +81,7 @@ void Menu::update() {
 }
 
 void Menu::draw() {
-    SDL_Renderer* pRenderer = Game::Instance()->getRenderer();
+    SDL_Renderer* pRenderer = Renderer::instance();
     SDL_SetRenderDrawColor(pRenderer, m_color.r, m_color.g, m_color.b, m_color.a); // RGBA
     SDL_RenderFillRect(pRenderer, &m_rect);
     
