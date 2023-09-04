@@ -9,6 +9,7 @@
 #define game_h
 
 #include "common.h"
+#include "renderer.h"
 #include "object.h"
 #include "menu.h"
 

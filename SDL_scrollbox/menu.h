@@ -7,9 +7,6 @@
 #ifndef menu_h
 #define menu_h
 
-#include <vector>
-
-#include "game.h"
 #include "object.h"
 #include "menu_item.h"
 

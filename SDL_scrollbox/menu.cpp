@@ -6,8 +6,6 @@
 //
 
 #include "menu.h"
-#include "renderer.h"
-
 
 Menu::Menu() {
     m_rect.x = m_rect.y = 100;
@@ -41,9 +39,9 @@ Menu::~Menu() {
     for(std::vector<MenuItem*>::size_type i = 0; i != m_menuItems.size(); i++ ) {
         std::cout << "Deleted menu item \"" << m_menuItems[i]->getLabel() << "\"" << std::endl;
         delete m_menuItems[i];
-        
+
     }
-        
+
     m_menuItems.clear();
     std::cout << "Menu object has been deleted." << std::endl;
 }
@@ -86,7 +84,7 @@ void Menu::draw() {
     SDL_RenderFillRect(pRenderer, &m_rect);
     
     for(std::vector<MenuItem*>::size_type i = m_frameStart; i != m_menuItems.size() && i < m_frameStart + m_frameLength; i++ )
-        m_menuItems[i]->draw(pRenderer);
+        m_menuItems[i]->draw();
 }
 
 bool Menu::onMouseBtnDownHandler(const SDL_Event& event) {

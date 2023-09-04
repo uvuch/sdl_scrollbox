@@ -12,12 +12,12 @@
 
 class Renderer {
 public:
-    static bool init(char* windowTitle, int x, int y, int w, int h, int flags);
+    static bool init(const string windowTitle, int x, int y, int w, int h, int flags);
     static SDL_Renderer* instance();
-    static void free();
+    static void quit();
     
 private:
-    Renderer(char* windowTitle, int x, int y, int w, int h, int flags);
+    Renderer(const string windowTitle, int x, int y, int w, int h, int flags);
     ~Renderer();
 
     static Renderer* s_pRenderer;

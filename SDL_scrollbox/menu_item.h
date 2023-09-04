@@ -8,19 +8,16 @@
 #ifndef menu_item_h
 #define menu_item_h
 
-#include <SDL2/SDL.h>
-#include <SDL2_ttf/SDL_ttf.h>
-#include <iostream>
-#include <string>
+#include "object.h"
 
-#include "game.h"
-
-class MenuItem {
+class MenuItem: public Object {
 public:
     MenuItem(std::string label, int x, int y, int w, int h);
+    ~MenuItem();
 
     std::string getLabel() { return m_strLabel; }
     bool handleEvents(const SDL_Event& event);
+    void update() {}
     void update(int x, int y);
     void draw();
     
@@ -33,6 +30,7 @@ private:
     
     TTF_Font* myFont;
     SDL_Surface* m_pSurface;
+    SDL_Texture* m_pTexture;
     SDL_Color white = { 0xFF, 0xFF, 0xFF, 0 };
 };
 

@@ -6,7 +6,6 @@
 //
 
 #include "menu_item.h"
-#include "renderer.h"
 
 MenuItem::MenuItem(std::string label, int x, int y, int w, int h) : m_strLabel(label)
 {
@@ -19,7 +18,15 @@ MenuItem::MenuItem(std::string label, int x, int y, int w, int h) : m_strLabel(l
     if (myFont) {
         m_pSurface = TTF_RenderText_Solid(myFont, label.c_str(), white);
         TTF_CloseFont(myFont);
+        
+        if (m_pSurface)
+            m_pTexture = SDL_CreateTextureFromSurface(Renderer::instance(), m_pSurface);
     }
+}
+
+MenuItem::~MenuItem() {
+    if (m_pTexture) SDL_DestroyTexture(m_pTexture);
+    if (m_pSurface) SDL_FreeSurface(m_pSurface);
 }
 
 bool MenuItem::handleEvents(const SDL_Event& event) {
@@ -38,21 +45,18 @@ void MenuItem::update(int x, int y) {
 
 void MenuItem::draw() {
     SDL_Renderer* pRenderer = Renderer::instance();
+    
     SDL_SetRenderDrawColor(pRenderer, 255, 0, 0, 255); // RGBA
     SDL_RenderFillRect(pRenderer, &m_rect);
     SDL_SetRenderDrawColor(pRenderer, 100, 0, 0, 255); // RGBA
     SDL_RenderDrawRect(pRenderer, &m_rect);
     
-    SDL_Texture* texture = SDL_CreateTextureFromSurface(pRenderer, m_pSurface);
     SDL_Rect fontRect; //create a rect
-    
     fontRect.w = m_pSurface->w ; // controls the width of the rect
     fontRect.h = m_pSurface->h;
     fontRect.x = m_rect.x + (m_rect.w - fontRect.w) / 2;  //controls the rect's x coordinate
     fontRect.y = m_rect.y; // controls the rect's y coordinte
-    SDL_RenderCopy(pRenderer, texture, NULL, &fontRect);
-    
-    SDL_DestroyTexture(texture);
+    SDL_RenderCopy(pRenderer, m_pTexture, NULL, &fontRect);
 }
 
 bool MenuItem::onMouseBtnDownHandler(const SDL_Event& event) {

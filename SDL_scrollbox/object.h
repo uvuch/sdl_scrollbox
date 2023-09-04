@@ -8,7 +8,8 @@
 #ifndef object_h
 #define object_h
 
-#include <SDL2/SDL.h>
+#include "common.h"
+#include "renderer.h"
 
 class Object {
 public:
