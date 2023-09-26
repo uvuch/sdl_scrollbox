@@ -8,7 +8,12 @@
 #include "error.h"
 #include "game.h"
 #include "menu.h"
-#include <SDL2_ttf/SDL_ttf.h>
+
+#if defined(__APPLE__) || defined(__MACH__)
+    #include <SDL2_ttf/SDL_ttf.h>
+#else
+    #include <SDL2/SDL_ttf.h>
+#endif
 
 Game::Game() : m_bQuit(true) {};
 
@@ -30,7 +35,7 @@ int Game::init() {
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
         return errorMessage(SDL_GetError());
     
-    m_pWindow = SDL_CreateWindow("Basic Game Engine", 0, 0, 1024, 768, SDL_WINDOW_FULLSCREEN_DESKTOP);
+    m_pWindow = SDL_CreateWindow("Basic Game Engine", 0, 0, 3840, 2160, SDL_WINDOW_SHOWN);
     if (m_pWindow) m_pRenderer = SDL_CreateRenderer(m_pWindow, -1, 0);
     if (!m_pWindow || !m_pRenderer)
         return errorMessage(SDL_GetError());
