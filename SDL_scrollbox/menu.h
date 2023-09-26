@@ -8,7 +8,7 @@
 #define menu_h
 
 #include "object.h"
-#include "menu_item.h"
+//#include "menu_item.h"
 
 class Menu: public Object {
 public:
@@ -22,19 +22,18 @@ public:
 private:
     SDL_Rect m_rect;
     SDL_Color m_color;
-    
-    int m_frameStart;
-    int m_frameLength;
-    static const int ITEM_HEIGHT = 40;
-    
-    int mouse_x, mouse_y;
-    bool clicked;
-    
-    std::vector<MenuItem*> m_menuItems;
+    // bool clicked;
 
-    bool onMouseBtnDownHandler(const SDL_Event& event);
-    bool onMouseBtnUpHandler(const SDL_Event& event);
-    bool onMouseMotionHandler(const SDL_Event& event);
+    // int m_frameStart;
+    // int m_frameLength;
+    // static const int ITEM_HEIGHT = 40;
+    // int mouse_x, mouse_y;
+    
+    // std::vector<MenuItem*> m_menuItems;
+
+    // bool onMouseBtnDownHandler(const SDL_Event& event);
+    // bool onMouseBtnUpHandler(const SDL_Event& event);
+    // bool onMouseMotionHandler(const SDL_Event& event);
 };
 
 #endif /* menu_h */

@@ -5,16 +5,14 @@
 //  Created by Serge Muzyka on 7/9/23.
 //
 
+#include <cassert>
 #include "error.h"
 #include "game.h"
 
 int main(int argc, const char * argv[]) {
     int returnResult = -1;
     Game *pGame = new Game();
-    if (!pGame) {
-        errorMessage("Could not create Game object");
-        return -1;
-    }
+    assert(pGame);
 
     if (!pGame->init()) {
         errorMessage("Could not create Game object");
@@ -26,7 +24,7 @@ int main(int argc, const char * argv[]) {
         pGame->update();
         pGame->render();
     }
-    
+
     delete pGame;
     return 0;
 }

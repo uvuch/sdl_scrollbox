@@ -8,9 +8,9 @@
 
 Game::Game() : m_bQuit(true) {};
 
-Game::~Game() {
+Game::~Game() {   
     for(std::vector<Object*>::size_type i = 0; i != m_objects.size(); i++ ) {
-        cout << "Deleting objects..." << endl;
+        std::cout << "Deleting objects..." << std::endl;
         delete m_objects[i];
     }
     m_objects.clear();
@@ -24,7 +24,7 @@ bool Game::init() {
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
         return errorMessage(SDL_GetError());
     
-    if (!Renderer::init("Basic Game Engine", 0, 0, 1024, 768, SDL_WINDOW_FULLSCREEN_DESKTOP))
+    if (!Renderer::init("Basic Menu Example", 0, 0, 3840, 2160, SDL_WINDOW_SHOWN))
         return false;
     
     TTF_Init();

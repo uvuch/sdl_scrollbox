@@ -9,7 +9,14 @@
 #define common_h
 
 #include <SDL2/SDL.h>
-#include <SDL2_ttf/SDL_ttf.h>
+
+#if defined(__APPLE__) || defined(__MACH__)
+    #include <SDL2_ttf/SDL_ttf.h>
+    #include <SDL2_image/SDL_image.h>
+#else
+    #include <SDL2/SDL_ttf.h>
+    #include <SDL2/SDL_image.h>
+#endif
 
 #include <iostream>
 #include <vector>
@@ -17,7 +24,5 @@
 #include <string>
 
 #include "error.h"
-
-using namespace std;
 
 #endif /* common_h */

@@ -16,7 +16,6 @@ Error* Error::Instance() {
 }
 
 bool Error::message(const char *msg) {
-    std::cout << "!! Error: ";
-    std::cout << msg << std::endl;
+    std::cout << "!! Error: " << msg << std::endl;
     return false;
 }
