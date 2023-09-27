@@ -12,6 +12,8 @@
 
 class MenuItem: public Object {
 public:
+    static const int ITEM_HEIGHT = 80;
+
     MenuItem(std::string label, int x, int y, int w, int h);
     ~MenuItem();
 
@@ -21,8 +23,8 @@ public:
     void update(int x, int y);
     void draw();
     
-    bool onMouseBtnDownHandler(const SDL_Event& event);
-    bool onMouseBtnUpHandler(const SDL_Event& event);
+    // bool onMouseBtnDownHandler(const SDL_Event& event);
+    // bool onMouseBtnUpHandler(const SDL_Event& event);
     
 private:
     std::string m_strLabel;

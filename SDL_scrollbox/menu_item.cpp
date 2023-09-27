@@ -14,7 +14,7 @@ MenuItem::MenuItem(std::string label, int x, int y, int w, int h) : m_strLabel(l
     m_rect.w = w;
     m_rect.h = h;
     
-    myFont = TTF_OpenFont("assets/fonts/Open 24 Display St.ttf", 30);
+    myFont = TTF_OpenFont("assets/fonts/Open 24 Display St.ttf", 60);
     if (myFont) {
         m_pSurface = TTF_RenderText_Solid(myFont, label.c_str(), white);
         TTF_CloseFont(myFont);
@@ -30,10 +30,10 @@ MenuItem::~MenuItem() {
 }
 
 bool MenuItem::handleEvents(const SDL_Event& event) {
-    switch(event.type) {
-        case SDL_MOUSEBUTTONDOWN:
-            return this->onMouseBtnDownHandler(event);
-    }
+    // switch(event.type) {
+    //     case SDL_MOUSEBUTTONDOWN:
+    //         return this->onMouseBtnDownHandler(event);
+    // }
 
     return false;
 }
@@ -59,14 +59,14 @@ void MenuItem::draw() {
     SDL_RenderCopy(pRenderer, m_pTexture, NULL, &fontRect);
 }
 
-bool MenuItem::onMouseBtnDownHandler(const SDL_Event& event) {
-    if (event.button.button == SDL_BUTTON_LEFT &&
-        event.button.x >= m_rect.x && event.button.x <= m_rect.x + m_rect.w &&
-        event.button.y >= m_rect.y && event.button.y <= m_rect.y + m_rect.h)
-    {
-        std::cout << "Menu item \"" << this->getLabel() << "\" clicked  " << std::endl;
-        return true;
-    }
+// bool MenuItem::onMouseBtnDownHandler(const SDL_Event& event) {
+//     if (event.button.button == SDL_BUTTON_LEFT &&
+//         event.button.x >= m_rect.x && event.button.x <= m_rect.x + m_rect.w &&
+//         event.button.y >= m_rect.y && event.button.y <= m_rect.y + m_rect.h)
+//     {
+//         std::cout << "Menu item \"" << this->getLabel() << "\" clicked  " << std::endl;
+//         return true;
+//     }
 
-    return false;
-}
+//     return false;
+// }

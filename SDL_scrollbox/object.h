@@ -10,6 +10,8 @@
 
 #include "common.h"
 #include "renderer.h"
+#include "texture_manager.h"
+#include "font_manager.h"
 
 class Object {
 public:

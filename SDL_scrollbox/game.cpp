@@ -59,7 +59,7 @@ void Game::update() {
 
 void Game::render() {
     int started_at = SDL_GetTicks();
-    SDL_SetRenderDrawColor(Renderer::instance(), 0, 255, 255, 255); // RGBA
+    SDL_SetRenderDrawColor(Renderer::instance(), 25, 50, 106, 255); // RGBA
     SDL_RenderClear(Renderer::instance());
     
     for(std::vector<Object*>::size_type i = 0; i != m_objects.size(); i++ ) {

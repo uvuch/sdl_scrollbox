@@ -7,47 +7,56 @@
 
 #include "texture_manager.h"
 
-TextureManager* TextureManager::s_pInstance = nullptr;
+#include <iostream>
 
-TextureManager* TextureManager::Instance() {
-    if (!s_pInstance)
-        s_pInstance = new TextureManager();
-        
-    return s_pInstance;
+TextureManager::TextureManager() {
+    std::cout << "Texture Manager constructor called" << std::endl;
 }
 
-bool TextureManager::load(std::string fileName, std::string id, SDL_Renderer* pRenderer) {
-    SDL_Surface* pTempSurface = IMG_Load(fileName.c_str());
-    if (!pTempSurface) return false;
-    
-    SDL_Texture* pTexture = SDL_CreateTextureFromSurface(pRenderer, pTempSurface);
-    SDL_FreeSurface(pTempSurface);
-    
-    if (!pTexture) return false;
-    
-    m_textureMap[id] = pTexture;
-    return true;
+TextureManager::~TextureManager() {
+    std::cout << "Texture Manager destructor called" << std::endl;
+
+    for(const auto& el: m_textureMap) {
+        SDL_DestroyTexture(el.second);
+        std::cout << "Destroyed texture with ID '" << el.first << "'" << std::endl;
+    }
+
+    std::cout << "Cleaning texture map (current size=" << m_textureMap.size() << ")... ";
+    m_textureMap.clear();
+    if (m_textureMap.size())
+        std::cout << "size > 0 after clean() call" << std::endl;
+    else
+        std::cout << "cleaned" << std::endl;
+}
+
+TextureManager& TextureManager::Instance() {
+    static TextureManager instance;        
+    return instance;
 }
 
 SDL_Texture* TextureManager::get(std::string id) {
     return m_textureMap[id];
 }
 
-/*
-void TextureManager::draw(std::string id, int x, int y, int width, int height, SDL_Renderer* pRenderer, SDL_RendererFlip flip) {
-    SDL_Rect srcRect;
-    SDL_Rect dstRect;
+bool TextureManager::load(SDL_Texture* pTexture, std::string id) {\
+    if (!pTexture) return false;
     
-    //SDL_QueryTexture(m_pTexture, NULL, NULL, &m_sourceRectangle.w, &m_sourceRectangle.h);
-
-    srcRect.x = 0;
-    srcRect.y = 0;
-
-    dstRect.x = x;
-    dstRect.y = y;
-    dstRect.w = srcRect.w = width;
-    dstRect.h = srcRect.h = height;
-    
-    SDL_RenderCopyEx(pRenderer, m_textureMap[id], &srcRect, &dstRect, 0, 0, flip);
+    m_textureMap[id] = pTexture;
+    return true;
 }
-*/
+
+bool TextureManager::load(SDL_Surface* pSurface, std::string id, SDL_Renderer* pRenderer) {
+    if (!pSurface) return false;
+    
+    SDL_Texture* pTexture = SDL_CreateTextureFromSurface(pRenderer, pSurface);    
+    return load(pTexture, id);
+}
+
+bool TextureManager::load(std::string fileName, std::string id, SDL_Renderer* pRenderer) {
+    SDL_Surface* pTempSurface = IMG_Load(fileName.c_str());
+    bool isTextureLoaded = load(pTempSurface, id, pRenderer);
+
+    if (pTempSurface) SDL_FreeSurface(pTempSurface);
+
+    return isTextureLoaded;
+}
