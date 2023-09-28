@@ -19,25 +19,32 @@ Menu::Menu() {
     m_textureRect.h = 775;
     
     TextureManager::Instance().load("assets/panel.png", "panel", Renderer::instance());
-    FontManager::Instance();
 
-    m_frameLength = 10;
+    m_frameLength = 6;
     m_frameStart = 0;
     
     m_bDraggable = false;
     
-    m_menuItems.push_back(new MenuItem("Option 1",  m_rect.x + m_rect.w / 2 - m_rect.w /6, m_rect.y +  150, m_rect.w / 3, MenuItem::ITEM_HEIGHT));
-    m_menuItems.push_back(new MenuItem("Option 2",  m_rect.x + m_rect.w / 2 - m_rect.w /6, m_rect.y + MenuItem::ITEM_HEIGHT * 1, m_rect.w / 3, MenuItem::ITEM_HEIGHT));
-    m_menuItems.push_back(new MenuItem("Option 3",  m_rect.x + m_rect.w / 2 - m_rect.w /6, m_rect.y + MenuItem::ITEM_HEIGHT * 2, m_rect.w / 3, MenuItem::ITEM_HEIGHT));
-    m_menuItems.push_back(new MenuItem("Option 4",  m_rect.x + m_rect.w / 2 - m_rect.w /6, m_rect.y + MenuItem::ITEM_HEIGHT * 3, m_rect.w / 3, MenuItem::ITEM_HEIGHT));
-    m_menuItems.push_back(new MenuItem("Option 5",  m_rect.x + m_rect.w / 2 - m_rect.w /6, m_rect.y + MenuItem::ITEM_HEIGHT * 4, m_rect.w / 3, MenuItem::ITEM_HEIGHT));
-    m_menuItems.push_back(new MenuItem("Option 6",  m_rect.x + m_rect.w / 2 - m_rect.w /6, m_rect.y + MenuItem::ITEM_HEIGHT * 5, m_rect.w / 3, MenuItem::ITEM_HEIGHT));
+    m_menuItems.push_back(new MenuItem("Option 1"));
+    m_menuItems.push_back(new MenuItem("Option 2"));
+    m_menuItems.push_back(new MenuItem("Option 3"));
+    m_menuItems.push_back(new MenuItem("Option 4"));
+    m_menuItems.push_back(new MenuItem("Option 5"));
+    m_menuItems.push_back(new MenuItem("Option 6"));
+    m_menuItems.push_back(new MenuItem("Option 7"));
+    m_menuItems.push_back(new MenuItem("Option 8"));
+    m_menuItems.push_back(new MenuItem("Option 9"));
+    m_menuItems.push_back(new MenuItem("Option 10"));
+
+    for(int i = m_frameStart; i < m_frameStart + m_frameLength && i < m_menuItems.size(); i++)
+        m_menuItems[i]->m_positionInFrame = i - m_frameStart;
+    
+    MenuItem::s_offsetX = m_rect.x + (m_rect.w - MenuItem::ITEM_WIDTH) / 2;
+    MenuItem::s_offsetY = m_rect.y + 150;
 }
 
 Menu::~Menu() {    
-    for(const auto& el : m_menuItems)
-        delete el;
-
+    for(const auto& el : m_menuItems) delete el;
     m_menuItems.clear();
 }
 
@@ -61,7 +68,7 @@ bool Menu::handleEvents(const SDL_Event& event) {
 
 void Menu::update() {
     for(std::vector<MenuItem*>::size_type i = m_frameStart; i != m_menuItems.size() && i < m_frameStart + m_frameLength; i++)
-        m_menuItems[i]->update(m_rect.x + m_rect.w / 2 - m_rect.w /6, m_rect.y + 150 + ((int) i - m_frameStart) * MenuItem::ITEM_HEIGHT);
+        m_menuItems[i]->update();
 }
 
 void Menu::draw() {
@@ -95,5 +102,8 @@ bool Menu::onMouseMotionHandler(const SDL_Event& event) {
 
     m_rect.x = event.motion.x - m_offsetX;
     m_rect.y = event.motion.y - m_offsetY;
+
+    MenuItem::s_offsetX = m_rect.x + (m_rect.w - MenuItem::ITEM_WIDTH) / 2;
+    MenuItem::s_offsetY = m_rect.y + 150;
     return true;
 }

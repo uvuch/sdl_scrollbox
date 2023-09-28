@@ -13,27 +13,28 @@
 class MenuItem: public Object {
 public:
     static const int ITEM_HEIGHT = 80;
+    static const int ITEM_WIDTH = 400;
+    static int s_offsetX, s_offsetY;
+    int m_positionInFrame;
 
-    MenuItem(std::string label, int x, int y, int w, int h);
+    MenuItem(std::string label);
+    // MenuItem(std::string label, int x, int y, int w, int h);
     ~MenuItem();
 
     std::string getLabel() { return m_strLabel; }
     bool handleEvents(const SDL_Event& event);
-    void update() {}
-    void update(int x, int y);
+    void update();
     void draw();
     
-    // bool onMouseBtnDownHandler(const SDL_Event& event);
-    // bool onMouseBtnUpHandler(const SDL_Event& event);
+    bool onMouseBtnDownHandler(const SDL_Event& event);
     
 private:
     std::string m_strLabel;
     SDL_Rect m_rect;
     
-    TTF_Font* myFont;
-    SDL_Surface* m_pSurface;
     SDL_Texture* m_pTexture;
-    SDL_Color white = { 0xFF, 0xFF, 0xFF, 0 };
+    // SDL_Surface* m_pSurface;
+    //SDL_Color white = { 0xFF, 0xFF, 0xFF, 0 };
 };
 
 #endif /* menu_item_h */

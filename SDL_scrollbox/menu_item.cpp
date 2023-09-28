@@ -7,66 +7,69 @@
 
 #include "menu_item.h"
 
-MenuItem::MenuItem(std::string label, int x, int y, int w, int h) : m_strLabel(label)
-{
-    m_rect.x = x;
-    m_rect.y = y;
-    m_rect.w = w;
-    m_rect.h = h;
-    
-    myFont = TTF_OpenFont("assets/fonts/Open 24 Display St.ttf", 60);
-    if (myFont) {
-        m_pSurface = TTF_RenderText_Solid(myFont, label.c_str(), white);
-        TTF_CloseFont(myFont);
-        
-        if (m_pSurface)
-            m_pTexture = SDL_CreateTextureFromSurface(Renderer::instance(), m_pSurface);
+int MenuItem::s_offsetX = 0;
+int MenuItem::s_offsetY = 0;
+
+MenuItem::MenuItem(std::string label) : m_strLabel(label), m_positionInFrame(-1) {
+    m_rect.w = ITEM_WIDTH;
+    m_rect.h = ITEM_HEIGHT;
+
+    if (!FontManager::Instance().get("menuItemLabel"))
+        //FontManager::Instance().load("assets/fonts/Open 24 Display St.ttf", "menuItemLabel", 60);
+        //FontManager::Instance().load("assets/fonts/space age.ttf", "menuItemLabel", 60);
+        FontManager::Instance().load("assets/fonts/Starcraft.otf", "menuItemLabel", 60);
+
+    TTF_Font *pFont = FontManager::Instance().get("menuItemLabel");
+    if (pFont) {
+        SDL_Surface *pSurface = TTF_RenderText_Solid(pFont, label.c_str(), { 0xFF, 0xFF, 0xFF, 0 });
+        if (pSurface)
+            m_pTexture = SDL_CreateTextureFromSurface(Renderer::instance(), pSurface);
     }
+    
 }
 
 MenuItem::~MenuItem() {
     if (m_pTexture) SDL_DestroyTexture(m_pTexture);
-    if (m_pSurface) SDL_FreeSurface(m_pSurface);
 }
 
 bool MenuItem::handleEvents(const SDL_Event& event) {
-    // switch(event.type) {
-    //     case SDL_MOUSEBUTTONDOWN:
-    //         return this->onMouseBtnDownHandler(event);
-    // }
+    switch(event.type) {
+        case SDL_MOUSEBUTTONDOWN:
+            return this->onMouseBtnDownHandler(event);
+    }
 
     return false;
 }
 
-void MenuItem::update(int x, int y) {
-    m_rect.x = x;
-    m_rect.y = y;
+void MenuItem::update() {
+    m_rect.x = s_offsetX;
+    m_rect.y = s_offsetY + m_positionInFrame * ITEM_HEIGHT;
 }
 
 void MenuItem::draw() {
     SDL_Renderer* pRenderer = Renderer::instance();
     
-    SDL_SetRenderDrawColor(pRenderer, 255, 0, 0, 255); // RGBA
-    SDL_RenderFillRect(pRenderer, &m_rect);
-    SDL_SetRenderDrawColor(pRenderer, 100, 0, 0, 255); // RGBA
-    SDL_RenderDrawRect(pRenderer, &m_rect);
+    // SDL_SetRenderDrawColor(pRenderer, 255, 0, 0, 255); // RGBA
+    // SDL_RenderFillRect(pRenderer, &m_rect);
+    // SDL_SetRenderDrawColor(pRenderer, 100, 0, 0, 255); // RGBA
+    // SDL_RenderDrawRect(pRenderer, &m_rect);
     
-    SDL_Rect fontRect; //create a rect
-    fontRect.w = m_pSurface->w ; // controls the width of the rect
-    fontRect.h = m_pSurface->h;
-    fontRect.x = m_rect.x + (m_rect.w - fontRect.w) / 2;  //controls the rect's x coordinate
-    fontRect.y = m_rect.y; // controls the rect's y coordinte
-    SDL_RenderCopy(pRenderer, m_pTexture, NULL, &fontRect);
+    // SDL_Rect fontRect;
+    // fontRect.w = ITEM_WIDTH ; // controls the width of the rect
+    // fontRect.h = ITEM_HEIGHT;
+    // fontRect.x = m_rect.x + (m_rect.w - fontRect.w) / 2;  //controls the rect's x coordinate
+    // fontRect.y = m_rect.y; // controls the rect's y coordinte
+    SDL_RenderCopy(pRenderer, m_pTexture, NULL, &m_rect);
 }
 
-// bool MenuItem::onMouseBtnDownHandler(const SDL_Event& event) {
-//     if (event.button.button == SDL_BUTTON_LEFT &&
-//         event.button.x >= m_rect.x && event.button.x <= m_rect.x + m_rect.w &&
-//         event.button.y >= m_rect.y && event.button.y <= m_rect.y + m_rect.h)
-//     {
-//         std::cout << "Menu item \"" << this->getLabel() << "\" clicked  " << std::endl;
-//         return true;
-//     }
+bool MenuItem::onMouseBtnDownHandler(const SDL_Event& event) {
+    if (event.button.button == SDL_BUTTON_LEFT &&
+        event.button.x >= m_rect.x && event.button.x <= m_rect.x + m_rect.w &&
+        event.button.y >= m_rect.y && event.button.y <= m_rect.y + m_rect.h)
+    {
+        std::cout << "Menu item \"" << this->getLabel() << "\" clicked" << std::endl;
+        return true;
+    }
 
-//     return false;
-// }
+    return false;
+}

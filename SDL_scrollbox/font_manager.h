@@ -13,6 +13,8 @@
 class FontManager {
 public:
     static FontManager& Instance();
+    TTF_Font* get(std::string id);
+    bool load(std::string fontFileName, std::string id, int size);
 
 private:
     FontManager();
