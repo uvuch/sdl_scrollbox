@@ -5,6 +5,8 @@
 //  Created by Serge Muzyka on 7/9/23.
 //
 #include "game.h"
+#include "menu.h"
+#include <SDL_ttf.h>
 
 Game::Game() : m_bQuit(true) {};
 

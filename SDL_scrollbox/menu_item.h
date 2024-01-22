@@ -9,6 +9,9 @@
 #define menu_item_h
 
 #include "object.h"
+#include <SDL2/SDL.h>
+#include <SDL_ttf.h>
+#include <string>
 
 class MenuItem: public Object {
 public:
